@@ -1,6 +1,16 @@
+'use client'
+
+import { signIn, useSession } from "next-auth/react"
+import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
 
-export default function Pricing() {
+ function Pricing() {
+
+  const {data: session} = useSession()
+  const email = session?.user?.email || ""
+
     return (
     
 <div className="overflow-hidden">
@@ -55,23 +65,25 @@ export default function Pricing() {
                   </span>
                 </li>
               </ul>
-        
-
-             
-              <ul className="space-y-2 text-sm sm:text-base">
-              
-              </ul>
-              
-            </div>
+           </div>
 
             <div className="mt-5 grid grid-cols-2 gap-x-4 py-4 first:pt-0 last:pb-0">
             <div>
                 <p className="text-sm text-gray-500">Cancel anytime.</p>
                 <p className="text-sm text-gray-500">No card required.</p>
               </div>
-              <div className="flex justify-end">
+              {session && session.user ? (
+                <div>
+                  <div className="flex justify-end">
                 <button type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Start</button>
               </div>
+                </div>
+              ) : (
+                <div className="flex justify-end">
+                <button type="button" onClick={() => signIn()} 
+                className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">SignIn</button>
+              </div>
+              )}
             </div>
           </div>
         
@@ -126,9 +138,17 @@ export default function Pricing() {
                 <p className="text-sm text-gray-500">No card required.</p>
               </div>
 
-              <div className="flex justify-end">
-                <button type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Start</button>
-              </div>
+              <form action="http://localhost:3333/payments/create-checkout-session" method="POST" className="flex justify-end">
+                <input 
+                type="hidden"
+                name="email"
+                value={email}
+                />
+                <button 
+                type="submit"
+                id="checkout-and-portal-button"
+                 className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Start</button>
+              </form>
             </div>
           </div>
         
@@ -163,4 +183,84 @@ export default function Pricing() {
 </div>
 
     )
+}
+
+interface SuccessDisplayProps {
+  sessionId: string; // Explicitly define the type here
+}
+
+const SuccessDisplay = ({ sessionId }: SuccessDisplayProps) => {
+
+  const {data: session} = useSession()
+  const email = session?.user?.email || ""
+
+  return (
+    <section>
+      <div className="product Box-root">
+        <div className="description Box-root">
+          <h3>Subscription successful!</h3>
+        </div>
+      </div>
+      <form action='http://localhost:8000/api/v1/payments/create-portal-session'
+      method="POST"
+      >
+        <input
+          type="hidden"
+          id="session-id"
+          name="session_id"
+          value={sessionId}
+        />
+        <input
+          type="hidden"
+          id="email"
+          name="email"
+          value={email}
+        />
+        <button id="checkout-and-portal-button" 
+        type="submit"
+        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+        >Click to return to home page</button>
+      </form>
+    </section>
+  );
+};
+
+const Message = ({ message }: { message: string }) => (
+  <section>
+    <p>{message}</p>
+  </section>
+);
+
+export default function Subscription() {
+  let [message, setMessage] = useState<string>('');
+  let [success, setSuccess] = useState<boolean>(false);
+  let [sessionId, setSessionId] = useState<string>('');
+
+  const query  = useSearchParams();
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    if (query.get('success')) {
+      setSuccess(true!)
+    }
+    
+    if (query.get('session_id')) {
+      setSessionId(query.get('session_id')!);
+    }
+
+    if (query.get('canceled')) {
+      setSuccess(false);
+      setMessage(
+        "Payment canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, [sessionId]);
+
+  if (!success && message === '') {
+    return <Pricing />;
+  } else if (success && sessionId !== '') {
+    return <SuccessDisplay sessionId={sessionId} />;
+  } else {
+    return <Message message={message} />;
+  }
 }

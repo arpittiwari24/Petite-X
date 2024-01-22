@@ -1,6 +1,7 @@
 'use client'
-import { useState } from "react";
-
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default function MainPage() {
     const [origUrl, setOrigUrl] = useState<string>('');
@@ -8,6 +9,18 @@ export default function MainPage() {
   const [loading, setLoading] = useState<boolean>(false)
   const [rateLimitExceeded, setRateLimitExceeded] = useState<boolean>(false);
 const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
+
+    const {data: session} = useSession()
+    const email= session?.user?.email
+
+  useEffect(() => {
+    const checkIsRegistered = async () => {
+      const data = await axios.post("http://localhost:3333/users/register", {email})
+      console.log(data)
+    }
+
+    checkIsRegistered()
+  },[])
 
 
   const isValidUrl = (url: string) => {
