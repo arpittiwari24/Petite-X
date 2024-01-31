@@ -1,5 +1,6 @@
 'use client'
 
+import axios from "axios"
 import { signIn, useSession } from "next-auth/react"
 import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url"
 import { useSearchParams } from "next/navigation"
@@ -17,7 +18,7 @@ import { useEffect, useState } from "react"
   <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
  
     <div className="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
-      <h2 className="text-3xl lg:text-4xl text-gray-800 font-bold dark:text-gray-200">
+      <h2 className="text-3xl lg:text-4xl text-gray-800 font-bold">
         Pricing Plans
       </h2>
     </div>
@@ -43,7 +44,7 @@ import { useEffect, useState } from "react"
                     <svg className="flex-shrink-0 h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <span className="text-gray-800 dark:text-gray-200">
-                    Up to 5 Url support
+                    Up to 5 Url  monthly
                   </span>
                 </li>
 
@@ -96,7 +97,7 @@ import { useEffect, useState } from "react"
             <span className="absolute top-0 end-0 rounded-se-xl rounded-es-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-white dark:text-gray-800">Most popular</span>
 
             <div className="mt-5">
-              <span className="text-6xl font-bold text-gray-800 dark:text-gray-200">$2</span>
+              <span className="text-6xl font-bold text-gray-800 dark:text-gray-200">$10</span>
               <span className="ms-3 text-gray-500">USD / monthly</span>
             </div>
 
@@ -137,7 +138,7 @@ import { useEffect, useState } from "react"
                 <p className="text-sm text-gray-500">Cancel anytime.</p>
                 <p className="text-sm text-gray-500">No card required.</p>
               </div>
-
+            {session && session?.user ? (
               <form action="http://localhost:3333/payments/create-checkout-session" method="POST" className="flex justify-end">
                 <input 
                 type="hidden"
@@ -147,8 +148,15 @@ import { useEffect, useState } from "react"
                 <button 
                 type="submit"
                 id="checkout-and-portal-button"
-                 className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Start</button>
+                 className="py-4 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Start</button>
               </form>
+      ) : (
+                <button 
+                type="submit"
+                id="checkout-and-portal-button"
+                 className="py-4 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                 onClick={() => signIn()}>Start</button>
+      )}
             </div>
           </div>
         
@@ -181,7 +189,6 @@ import { useEffect, useState } from "react"
     </div>
   </div>
 </div>
-
     )
 }
 
@@ -189,11 +196,23 @@ interface SuccessDisplayProps {
   sessionId: string; // Explicitly define the type here
 }
 
+
 const SuccessDisplay = ({ sessionId }: SuccessDisplayProps) => {
-
+  
+  const handlesubmit = async () => {
+    await axios.post("http://localhost:3333/payments/create-portal-session",jsonObject,{
+      withCredentials: true
+    })
+  }
+  
   const {data: session} = useSession()
-  const email = session?.user?.email || ""
-
+  const email = session?.user?.email
+  const jsonObject : object = {
+    email: email,
+    sessionId: sessionId
+  }
+  console.log(email);
+  
   return (
     <section>
       <div className="product Box-root">
@@ -201,21 +220,19 @@ const SuccessDisplay = ({ sessionId }: SuccessDisplayProps) => {
           <h3>Subscription successful!</h3>
         </div>
       </div>
-      <form action='http://localhost:8000/api/v1/payments/create-portal-session'
-      method="POST"
-      >
-        <input
+      <form onSubmit={handlesubmit} >
+        {/* <input
           type="hidden"
           id="session-id"
           name="session_id"
           value={sessionId}
-        />
-        <input
+        /> 
+          <input
           type="hidden"
           id="email"
           name="email"
           value={email}
-        />
+        />  */}
         <button id="checkout-and-portal-button" 
         type="submit"
         className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"

@@ -35,7 +35,13 @@ export default function Navbar () {
           </ul>
         </div>
         <div className="navbar-end">
-          <SigninButton />
+          {session && session?.user ? (
+            <div className="w-10 rounded-full">
+            <img alt={session.user.name || ""} src={session.user.image || ""} />
+          </div>
+          ): (
+            <SigninButton />
+          )}
         </div>
       </div>
     )

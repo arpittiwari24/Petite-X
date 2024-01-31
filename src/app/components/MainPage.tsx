@@ -3,12 +3,22 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
+interface Urls {
+  _id: string,
+  date: string,
+  origUrl: string,
+  shortUrl: string,
+  clicks: number
+}
+
 export default function MainPage() {
     const [origUrl, setOrigUrl] = useState<string>('');
-  const [shortUrl, setShortUrl] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false)
-  const [rateLimitExceeded, setRateLimitExceeded] = useState<boolean>(false);
-const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
+    const [shortUrl, setShortUrl] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false)
+    const [rateLimitExceeded, setRateLimitExceeded] = useState<boolean>(false);
+    const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
+    const [urls, setUrls] = useState<Urls[]>([])
+    const [clicked, setClicked] = useState<boolean>(false)
 
     const {data: session} = useSession()
     const email= session?.user?.email
@@ -19,7 +29,15 @@ const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
       console.log(data)
     }
 
+    const getAllUrls = async () => {
+      const data = await axios.post("http://localhost:3333/allurl",{email})
+      console.log(data.data);
+      
+      setUrls(data.data)
+    }
+
     checkIsRegistered()
+    getAllUrls()
   },[])
 
 
@@ -32,8 +50,10 @@ const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
     setOrigUrl(event.target.value);
   };
 
+  // complete this edit function 
   const handleEdit = (event: React.FormEvent) => {
     event.preventDefault()
+
   }
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -47,22 +67,24 @@ const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
     }
   
     try {
-      const response = await fetch('https://petite.onrender.com/api/short', {
+      const response = await fetch('http://localhost:3333/api/short', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ origUrl }),
+        body: JSON.stringify({ origUrl,email }),
       });
   
       if (response.status === 429) {
         // Rate limit exceeded
-        const rateLimitMessage = await response.text();
+      const rateLimitMessage = await response.text();
       setRateLimitExceeded(true);
       setRateLimitMessage(rateLimitMessage);
         setLoading(false)
       } else if (response.ok) {
         const data = await response.json();
+        console.log(data);
+        
         setShortUrl(data.shortUrl);
         setLoading(false);
       } else {
@@ -76,22 +98,23 @@ const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
 
   return (
     <div className="flex flex-col justify-center items-center text-white">
-    <h1 className="text-4xl md:text-7xl text-center mb-4">URL Shortener</h1>
-    <form onSubmit={handleSubmit} className="w-full max-sm:w-2/3 max-w-sm">
-    <div className="flex flex-col mb-4 pt-10">
+    <form onSubmit={handleSubmit} className="w-full max-sm:w-2/3 ">
+    <div className="flex flex-col items-center mb-4 pt-10">
       <input
         type="text"
         id="original-url"
         value={origUrl}
         onChange={handleInputChange}
         placeholder="Enter the URL"
-        className="mt-1 p-2 rounded border border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none"
+        className="w-1/3 max-sm:w-full mt-1 p-2 rounded border border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none"
       />
     </div>
-    <button type="submit" className="btn btn-success w-full py-2">Shorten URL</button>
+    <div className="flex items-center justify-center">
+    <button type="submit" className="btn btn-success  py-2">Shorten URL</button>
+    </div>
   </form>
-    {loading && <div className="mt-4 text-lg">Loading...</div>}
-    {rateLimitExceeded && (
+    {loading && <span className="loading loading-infinity loading-lg text-gray-200"></span>}
+    {/* {rateLimitExceeded && (
       <>
      <div className="mt-4 max-sm:text-lg lg:text-xl">
        {rateLimitMessage}
@@ -100,7 +123,7 @@ const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
       <img src="https://media.tenor.com/JZJ7ukQTO24AAAAC/come-back-tomorrow-were-closed.gif" alt="Come back Tomorrow" />
      </div>
      </>
-    )}
+    )} */}
     {shortUrl && (
      <div className="mt-4 flex flex-col md:flex-row md:items-center">
      <p className="text-lg font-medium">Shortened URL:</p>
@@ -112,14 +135,51 @@ const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
        className="btn btn-secondary mt-2 md:mt-0 md:ml-2 flex items-center justify-center p-1 w-20"
      >  Copy
      </button>
-     <button
-       onClick={handleEdit}
-       className="btn btn-secondary mt-2 md:mt-0 md:ml-2 flex items-center justify-center p-1 w-20"
-     >  Edit
-     </button>
     <div className='px-2'><button className='btn btn-info' onClick={() => window.location.reload()}>Reload</button></div>
    </div>   
     )}
+
+<div className="flex flex-col items-center justify-center gap-4 py-10 sm:w-full md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto">
+  {urls.map((url) => (
+    <div key={url._id} className="bg-gray-100 w-full p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+      <div className="flex items-center justify-between gap-4">
+        <a
+          href={url.shortUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 font-semibold underline break-all max-sm:text-sm"
+        >
+          {url.shortUrl}
+        </a>
+        <button
+          className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
+          onClick={() => navigator.clipboard.writeText(url.shortUrl)}
+        >
+          <img src="copy.svg" alt="copy" width={20} height={20} />
+        </button>
+        <button
+          onClick={handleEdit}
+          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
+        >
+          <img src="edit.svg" alt="edit" width={20} height={20} />
+        </button>
+        <button
+          // onClick={handleDelete}
+          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
+        >
+          <img src="delete.svg" alt="delete" width={20} height={20} />
+        </button>
+        <button
+          // onClick={handleDelete}
+          className="flex items-center justify-center hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
+        >
+           {url.clicks}
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
   </div>
   
   );
