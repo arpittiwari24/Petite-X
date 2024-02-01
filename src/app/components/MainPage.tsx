@@ -1,7 +1,7 @@
 'use client'
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface Urls {
   _id: string,
@@ -19,6 +19,8 @@ export default function MainPage() {
     const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
     const [urls, setUrls] = useState<Urls[]>([])
     const [clicked, setClicked] = useState<boolean>(false)
+    const [newId, setNewId] = useState<string>("")
+    const [editId,setEditId] = useState<string>("")
 
     const {data: session} = useSession()
     const email= session?.user?.email
@@ -51,8 +53,22 @@ export default function MainPage() {
   };
 
   // complete this edit function 
-  const handleEdit = (event: React.FormEvent) => {
+  const handleEdit = async (event: React.FormEvent) => {
     event.preventDefault()
+
+    try {
+      const data = await fetch(`http://localhost:3333/${editId}`,{
+        method: "PUT",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({newId})
+      })
+      setClicked(false)
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 
@@ -114,7 +130,7 @@ export default function MainPage() {
     </div>
   </form>
     {loading && <span className="loading loading-infinity loading-lg text-gray-200"></span>}
-    {/* {rateLimitExceeded && (
+    {rateLimitExceeded && (
       <>
      <div className="mt-4 max-sm:text-lg lg:text-xl">
        {rateLimitMessage}
@@ -123,7 +139,7 @@ export default function MainPage() {
       <img src="https://media.tenor.com/JZJ7ukQTO24AAAAC/come-back-tomorrow-were-closed.gif" alt="Come back Tomorrow" />
      </div>
      </>
-    )} */}
+    )}
     {shortUrl && (
      <div className="mt-4 flex flex-col md:flex-row md:items-center">
      <p className="text-lg font-medium">Shortened URL:</p>
@@ -143,14 +159,35 @@ export default function MainPage() {
   {urls.map((url) => (
     <div key={url._id} className="bg-gray-100 w-full p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
       <div className="flex items-center justify-between gap-4">
-        <a
-          href={url.shortUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 font-semibold underline break-all max-sm:text-sm"
+      {!clicked ? (
+         <a
+         href={url.shortUrl}
+         target="_blank"
+         rel="noopener noreferrer"
+         className="text-blue-500 font-semibold underline break-all max-sm:text-sm"
+       >
+         {url.shortUrl}
+       </a> 
+      ) : (
+       <form onSubmit={handleEdit}>
+         <input type="text" value={url.shortUrl} 
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNewId(event.target.value)}/>
+         <button
+          type="submit"
+          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
         >
-          {url.shortUrl}
-        </a>
+          Done
+        </button>
+        <button
+          onClick={() => {
+            setClicked(false)
+          }}
+          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
+        >
+          Cancel
+        </button>
+       </form>
+      ) }
         <button
           className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
           onClick={() => navigator.clipboard.writeText(url.shortUrl)}
@@ -158,7 +195,10 @@ export default function MainPage() {
           <img src="copy.svg" alt="copy" width={20} height={20} />
         </button>
         <button
-          onClick={handleEdit}
+          onClick={() => {
+            setClicked(true)
+            setEditId(url._id)
+          }}
           className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
         >
           <img src="edit.svg" alt="edit" width={20} height={20} />
