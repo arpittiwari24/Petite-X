@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 export default function Navbar () {
     const {data: session} = useSession()
     return (
-        <div className="navbar bg-transparent">
+        <div className="navbar ">
         <div className="navbar-start">
           <div className="dropdown text-2xl">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -22,22 +22,20 @@ export default function Navbar () {
             )}
             </ul>
           </div>
-          <Link href="/" className="btn btn-ghost text-xl">Petite-X</Link>
+          <Link href="/" className="btn btn-ghost max-sm:text-xl text-3xl">Petite-X</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-xl">
+          <ul className="menu menu-horizontal px-1 text-lg">
             <li><Link href="/pricing">Pricing</Link></li>
-            {session && session.user ? (
-                <li><Link href="/profile">Profile</Link></li>
-            ): (
-                <li></li>
-            )}
+            <li><Link href="/features">Features</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/blogs">Blogs</Link></li>
           </ul>
         </div>
         <div className="navbar-end">
           {session && session?.user ? (
-            <div className="w-10 rounded-full">
-            <img alt={session.user.name || ""} src={session.user.image || ""} />
+            <div className="w-10 rounded-lg">
+              <Link href="/profile"> <img alt={session.user.name || ""} src={session.user.image || ""} className="rounded-full"/></Link>
           </div>
           ): (
             <SigninButton />
