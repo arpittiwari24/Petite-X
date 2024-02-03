@@ -53,10 +53,10 @@ const Pricing = () => {
 
   <div className="flex flex-col border-2 border-blue-600 text-center shadow-xl rounded-xl p-8 ">
     <p className="mb-3"><span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-xs uppercase font-semibold bg-blue-100 text-blue-800  ">Most popular</span></p>
-    <h4 className="font-medium text-lg text-gray-800 ">Startup</h4>
+    <h4 className="font-medium text-lg text-gray-800 ">Monthly</h4>
     <span className="mt-5 font-bold text-5xl text-gray-800 ">
       <span className="font-bold text-2xl ">$</span>
-      39
+      5
     </span>
     <p className="mt-2 text-sm text-gray-500">All the basics for starting a new business</p>
 
@@ -89,10 +89,10 @@ const Pricing = () => {
   </div>
 
   <div className="flex flex-col border border-gray-700 text-center rounded-xl p-8 ">
-    <h4 className="font-medium text-lg text-gray-800 ">Team</h4>
+    <h4 className="font-medium text-lg text-gray-800 ">Lifetime</h4>
     <span className="mt-5 font-bold text-5xl text-gray-800 ">
       <span className="font-bold text-2xl ">$</span>
-      89
+      50
     </span>
     <p className="mt-2 text-sm text-gray-500">Everything you need for a growing business</p>
 

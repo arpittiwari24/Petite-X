@@ -142,7 +142,7 @@ export default function MainPage() {
     )}
     {shortUrl && (
      <div className="mt-4 flex flex-col md:flex-row md:items-center">
-     <p className="text-lg font-medium">Shortened URL:</p>
+     <p className="text-lg font-medium text-gray-900">Shortened URL:</p>
      <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="text-gray-800 bg-slate-300 underline mt-2 md:mt-0 md:ml-2">
        {shortUrl}
      </a>

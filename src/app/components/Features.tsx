@@ -4,221 +4,128 @@ const Features = () => {
 
   return (
     <>
-    {/* Features */}
-    <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-      {/* Tab Nav */}
-      <nav
-        className="max-w-6xl mx-auto grid sm:flex gap-y-px sm:gap-y-0 sm:gap-x-4"
-        aria-label="Tabs"
-        role="tablist"
-      >
-        <button
-          type="button"
-          className="hs-tab-active:bg-gray-100 hs-tab-active:hover:border-transparent w-full flex flex-col text-start hover:bg-gray-100 p-3 md:p-5 rounded-xl hs-tab-active:bg-white/[.05]  focus:outline-none focus:ring-1 focus:ring-gray-600 active"
-          id="tabs-with-card-item-1"
-          data-hs-tab="#tabs-with-card-1"
-          aria-controls="tabs-with-card-1"
-          role="tab"
-        >
-          <svg
-            className="flex-shrink-0 hidden sm:block h-7 w-7 hs-tab-active:text-blue-600 text-gray-800 hs-tab-active:text-blue-500 "
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" />
-            <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" />
-            <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" />
-            <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" />
-            <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" />
-          </svg>
-          <span className="mt-5">
-            <span className="hs-tab-active:text-blue-600 block font-semibold text-gray-800 hs-tab-active:text-blue-500 ">
-              All-in-one link management
-            </span>
-            <span className="hidden lg:block mt-2 text-gray-800 ">
-              Create, manage, update your links
-            </span>
-          </span>
-        </button>
-        <button
-          type="button"
-          className="hs-tab-active:bg-gray-100 hs-tab-active:hover:border-transparent w-full flex flex-col text-start hover:bg-gray-100 p-3 md:p-5 rounded-xl hs-tab-active:bg-white/[.05]  focus:outline-none focus:ring-1 focus:ring-gray-600"
-          id="tabs-with-card-item-3"
-          data-hs-tab="#tabs-with-card-3"
-          aria-controls="tabs-with-card-3"
-          role="tab"
-        >
-          <svg
-            className="flex-shrink-0 hidden sm:block h-7 w-7 hs-tab-active:text-blue-600 text-gray-800 hs-tab-active:text-blue-500 "
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-            <path d="M5 3v4" />
-            <path d="M19 17v4" />
-            <path d="M3 5h4" />
-            <path d="M17 19h4" />
-          </svg>
-          <span className="mt-5">
-            <span className="hs-tab-active:text-blue-600 block font-semibold text-gray-800 hs-tab-active:text-blue-500 ">
-              Solving problems for every team
-            </span>
-            <span className="hidden lg:block mt-2 text-gray-800 ">
-              One tool for your company to share links and ship projects.
-            </span>
-          </span>
-        </button>
-      </nav>
-      {/* End Tab Nav */}
-      {/* Tab Content */}
-      <div className="mt-12 md:mt-16">
-        <div
-          id="tabs-with-card-1"
-          role="tabpanel"
-          aria-labelledby="tabs-with-card-item-1"
-        >
-          {/* Devices */}
-          <div className="max-w-[1140px] lg:pb-32 relative">
-            {/* Mobile Device */}
-            <figure className="hidden absolute bottom-0 start-0 z-[2] max-w-full w-60 h-auto mb-20 ms-20 lg:block">
-              <div className="p-1.5 bg-gray-100 rounded-3xl shadow-[0_2.75rem_5.5rem_-3.5rem_rgb(45_55_75_/_20%),_0_2rem_4rem_-2rem_rgb(45_55_75_/_30%),_inset_0_-0.1875rem_0.3125rem_0_rgb(45_55_75_/_20%)] ">
-                {/* <img
-                  className="max-w-full h-auto rounded-[1.25rem]"
-                  src="/vercel.svg"
-                  alt="Image Description"
-                /> */}
-              </div>
-            </figure>
-            {/* End Mobile Device */}
-            {/* Browser Device */}
-            <figure className="ms-auto me-20 relative z-[1] max-w-full w-[50rem] h-auto rounded-b-lg shadow-[0_2.75rem_3.5rem_-2rem_rgb(45_55_75_/_20%),_0_0_5rem_-2rem_rgb(45_55_75_/_15%)] ">
-              <div className="relative flex items-center max-w-[50rem] bg-white border-b border-gray-100 rounded-t-lg py-2 px-24 ">
-                <div className="flex space-x-1 absolute top-2/4 start-4 -translate-y-1">
-                  <span className="w-2 h-2 bg-gray-200 rounded-full " />
-                  <span className="w-2 h-2 bg-gray-200 rounded-full " />
-                  <span className="w-2 h-2 bg-gray-200 rounded-full " />
-                </div>
-                <div className="flex justify-center items-center w-full h-full bg-gray-200 text-[.25rem] text-gray-800 rounded-sm sm:text-[.5rem]  ">
-                  petite-x.in
-                </div>
-              </div>
-              <div className="bg-gray-800 rounded-b-lg">
-                {/* <img
-                  className="max-w-full h-auto rounded-b-lg"
-                  src="../assets/img/mockups/img8.jpg"
-                  alt="Image Description"
-                /> */}
-              </div>
-            </figure>
-            {/* End Browser Device */}
+    {/* Container for demo purpose */}
+    <div className="container my-24 mx-auto md:px-6">
+      {/* Section: Design Block */}
+      <section className="mb-32 text-center">
+        <div className="flex justify-center">
+          <div className="max-w-[700px] text-center">
+            <h2 className="mb-6 text-center text-5xl max-sm:text-3xl font-bold">
+              Why is it so
+              <u className="text-primary text-primary-400 px-2">great?</u>
+            </h2>
+            <p className="mb-16 text-neutral-500 ">
+              Minus fuga aliquid vero facere ducimus quos, quisquam nemo?
+              Molestias ullam provident vitae error aliquam dolorum temporibus?
+              Doloremque, quasi
+            </p>
           </div>
-          {/* End Devices */}
         </div>
-        <div
-          id="tabs-with-card-2"
-          className="hidden"
-          role="tabpanel"
-          aria-labelledby="tabs-with-card-item-2"
-        >
-          {/* Devices */}
-          <div className="max-w-[1140px] lg:pb-32 relative">
-            {/* Mobile Device */}
-            <figure className="hidden absolute bottom-0 start-0 z-[2] max-w-full w-60 h-auto mb-20 ms-20 lg:block">
-              <div className="p-1.5  rounded-3xl shadow-[0_2.75rem_5.5rem_-3.5rem_rgb(0_0_0_/_20%),_0_2rem_4rem_-2rem_rgb(0_0_0_/_30%),_inset_0_-0.1875rem_0.3125rem_0_rgb(0_0_0_/_20%)]">
-                <img
-                  className="max-w-full h-auto rounded-[1.25rem]"
-                  src="../assets/img/mockups/img11.jpg"
-                  alt="Image Description"
+        <div className="grid gap-x-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
+          <div className="mb-12 lg:mb-0">
+            <div className="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
                 />
-              </div>
-            </figure>
-            {/* End Mobile Device */}
-            {/* Browser Device */}
-            <figure className="ms-auto me-20 relative z-[1] max-w-full w-[50rem] h-auto rounded-b-lg shadow-shadow-[0_2.75rem_3.5rem_-2rem_rgb(0_0_0_/_20%),_0_0_5rem_-2rem_rgb(0_0_0_/_15%)]">
-              <div className="relative flex items-center max-w-[50rem] bg-gray-800 border-b border-gray-700 rounded-t-lg py-2 px-24">
-                <div className="flex space-x-1 absolute top-2/4 start-4 -translate-y-1">
-                  <span className="w-2 h-2  rounded-full" />
-                  <span className="w-2 h-2  rounded-full" />
-                  <span className="w-2 h-2  rounded-full" />
-                </div>
-                <div className="flex justify-center items-center w-full h-full  text-[.25rem]  rounded-sm sm:text-[.5rem]">
-                  petite-x.in
-                </div>
-              </div>
-              <div className="bg-gray-800 rounded-b-lg">
-                <img
-                  className="max-w-full h-auto rounded-b-lg"
-                  src="../assets/img/mockups/img10.jpg"
-                  alt="Image Description"
-                />
-              </div>
-            </figure>
-            {/* End Browser Device */}
+              </svg>
+            </div>
+            <h5 className="mb-4 text-lg font-bold">Support 24/7</h5>
+            <p className="text-neutral-500 ">
+              Laudantium totam quas cumque pariatur at doloremque hic quos quia
+              eius. Reiciendis optio minus mollitia rerum labore
+            </p>
           </div>
-          {/* End Devices */}
-        </div>
-        <div
-          id="tabs-with-card-3"
-          className="hidden"
-          role="tabpanel"
-          aria-labelledby="tabs-with-card-item-3"
-        >
-          {/* Devices */}
-          <div className="max-w-[1140px] lg:pb-32 relative">
-            {/* Mobile Device */}
-            <figure className="hidden absolute bottom-0 start-0 z-[2] max-w-full w-60 h-auto mb-20 ms-20 lg:block">
-              <div className="p-1.5 bg-gray-100 rounded-3xl shadow-[0_2.75rem_5.5rem_-3.5rem_rgb(45_55_75_/_20%),_0_2rem_4rem_-2rem_rgb(45_55_75_/_30%),_inset_0_-0.1875rem_0.3125rem_0_rgb(45_55_75_/_20%)] ">
-                <img
-                  className="max-w-full h-auto rounded-[1.25rem]"
-                  src="../assets/img/mockups/img13.jpg"
-                  alt="Image Description"
+          <div className="mb-12 lg:mb-0">
+            <div className="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
                 />
-              </div>
-            </figure>
-            {/* End Mobile Device */}
-            {/* Browser Device */}
-            <figure className="ms-auto me-20 relative z-[1] max-w-full w-[50rem] h-auto rounded-b-lg shadow-[0_2.75rem_3.5rem_-2rem_rgb(45_55_75_/_20%),_0_0_5rem_-2rem_rgb(45_55_75_/_15%)]">
-              <div className="relative flex items-center max-w-[50rem] bg-white border-b border-gray-100 rounded-t-lg py-2 px-24 ">
-                <div className="flex space-x-1 absolute top-2/4 start-4 -translate-y-1">
-                  <span className="w-2 h-2 bg-gray-200 rounded-full " />
-                  <span className="w-2 h-2 bg-gray-200 rounded-full " />
-                  <span className="w-2 h-2 bg-gray-200 rounded-full " />
-                </div>
-                <div className="flex justify-center items-center w-full h-full bg-gray-200 text-[.25rem] text-gray-800 rounded-sm sm:text-[.5rem]  ">
-                  petite-x.in
-                </div>
-              </div>
-              <div className="bg-gray-800 rounded-b-lg">
-                <img
-                  className="max-w-full h-auto rounded-b-lg"
-                  src="/vercel.svg"
-                  alt="Image Description"
-                />
-              </div>
-            </figure>
-            {/* End Browser Device */}
+              </svg>
+            </div>
+            <h5 className="mb-4 text-lg font-bold">Safe and solid</h5>
+            <p className="text-neutral-500 ">
+              Eum nostrum fugit numquam, voluptates veniam neque quibusdam ullam
+              aspernatur odio soluta, quisquam dolore animi
+            </p>
           </div>
-          {/* End Devices */}
+          <div className="mb-12 md:mb-0">
+            <div className="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+                />
+              </svg>
+            </div>
+            <h5 className="mb-4 text-lg font-bold">Extremely fast</h5>
+            <p className="text-neutral-500 ">
+              Enim cupiditate, minus nulla dolor cumque iure eveniet facere ullam
+              beatae hic voluptatibus dolores exercitationem
+            </p>
+          </div>
+          <div className="mb-12 md:mb-0">
+            <div className="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"
+                />
+              </svg>
+            </div>
+            <h5 className="mb-4 text-lg font-bold">Live analytics</h5>
+            <p className="text-neutral-500 ">
+              Illum doloremque ea, blanditiis sed dolor laborum praesentium maxime
+              sint, consectetur atque ipsum ab adipisci
+            </p>
+          </div>
         </div>
-      </div>
-      {/* End Tab Content */}
+      </section>
+      {/* Section: Design Block */}
     </div>
-    {/* End Features */}
+    {/* Container for demo purpose */}
   </>
+  
   
   );
 };

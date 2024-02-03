@@ -21,7 +21,7 @@ export default function HomePage() {
      <div>
      <Hero />
      </div>
-     <div className="py-8 pt-32">
+     <div className="py-8 pt-16">
      <Features />
      </div>
      <div className="py-10">
