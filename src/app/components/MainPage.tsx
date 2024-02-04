@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
+import Sidebar from "./Sidebar";
 
 interface Urls {
   _id: string,
@@ -112,8 +113,12 @@ export default function MainPage() {
     }
   };
 
+  const handleDelete = async () => {
+    const data = await fetch(`http://localhost:3333/`)
+  }
+
   return (
-    <div className="flex flex-col justify-center items-center text-white">
+    <div className="flex flex-row-reverse justify-center items-center text-white">
     <form onSubmit={handleSubmit} className="w-full max-sm:w-2/3 ">
     <div className="flex flex-col items-center mb-4 pt-10">
       <input
@@ -129,8 +134,8 @@ export default function MainPage() {
     <button type="submit" className="btn btn-success  py-2">Shorten URL</button>
     </div>
   </form>
-    {loading && <span className="loading loading-infinity loading-lg text-gray-200"></span>}
-    {rateLimitExceeded && (
+    {loading && <span className="loading loading-infinity loading-lg text-gray-900"></span>}
+    {/* {rateLimitExceeded && (
       <>
      <div className="mt-4 max-sm:text-lg lg:text-xl">
        {rateLimitMessage}
@@ -139,7 +144,7 @@ export default function MainPage() {
       <img src="https://media.tenor.com/JZJ7ukQTO24AAAAC/come-back-tomorrow-were-closed.gif" alt="Come back Tomorrow" />
      </div>
      </>
-    )}
+    )} */}
     {shortUrl && (
      <div className="mt-4 flex flex-col md:flex-row md:items-center">
      <p className="text-lg font-medium text-gray-900">Shortened URL:</p>
@@ -154,12 +159,11 @@ export default function MainPage() {
     <div className='px-2'><button className='btn btn-info' onClick={() => window.location.reload()}>Reload</button></div>
    </div>   
     )}
-
+  <Sidebar />
 <div className="flex flex-col items-center justify-center gap-4 py-10 sm:w-full md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto">
-  {urls.map((url) => (
+  {/* {urls.map((url) => (
     <div key={url._id} className="bg-gray-100 w-full p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
       <div className="flex items-center justify-between gap-4">
-      {!clicked ? (
          <a
          href={url.shortUrl}
          target="_blank"
@@ -168,26 +172,6 @@ export default function MainPage() {
        >
          {url.shortUrl}
        </a> 
-      ) : (
-       <form onSubmit={handleEdit}>
-         <input type="text" value={url.shortUrl} 
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNewId(event.target.value)}/>
-         <button
-          type="submit"
-          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
-        >
-          Done
-        </button>
-        <button
-          onClick={() => {
-            setClicked(false)
-          }}
-          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
-        >
-          Cancel
-        </button>
-       </form>
-      ) }
         <button
           className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
           onClick={() => navigator.clipboard.writeText(url.shortUrl)}
@@ -204,7 +188,7 @@ export default function MainPage() {
           <img src="edit.svg" alt="edit" width={20} height={20} />
         </button>
         <button
-          // onClick={handleDelete}
+          onClick={handleDelete}
           className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md p-2"
         >
           <img src="delete.svg" alt="delete" width={20} height={20} />
@@ -217,7 +201,8 @@ export default function MainPage() {
         </button>
       </div>
     </div>
-  ))}
+  ))} */}
+
 </div>
 
   </div>
