@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link";
 import SigninButton from "./SignInButton";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 
 export default function Navbar () {
@@ -15,11 +15,9 @@ export default function Navbar () {
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li><Link href="/pricing">Pricing</Link></li>
-            {session && session.user ? (
-                <li><Link href="/profile">Profile</Link></li>
-            ): (
-                <li></li>
-            )}
+            <li><Link href="/features">Features</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/blogs">Blogs</Link></li>
             </ul>
           </div>
           <Link href="/" className="btn btn-ghost max-sm:text-xl text-3xl">Petite-X</Link>
@@ -34,12 +32,20 @@ export default function Navbar () {
         </div>
         <div className="navbar-end">
           {session && session?.user ? (
-            <div className="w-10 rounded-lg">
-              <Link href="/profile"> <img alt={session.user.name || ""} src={session.user.image || ""} className="rounded-full"/></Link>
+            <div className="w-14 rounded-lg">
+              <div className="dropdown">
+            <div tabIndex={0} role="button" className="">
+             <img alt={session.user.name || ""} src={session.user.image || ""} className="rounded-full"/> 
+            </div>
+            <ul tabIndex={0} className=" overflow-hidden menu menu-sm dropdown-content mt-3 z-[1]  shadow rounded-box w-96">
+            <li><Link href="/profile">Profile</Link></li>
+            <li><button onClick={() => signOut()} className="text-black">SignOut</button></li>
+            </ul>
+          </div>
           </div>
           ): (
             <SigninButton />
-          )}
+          )}  
         </div>
       </div>
     )

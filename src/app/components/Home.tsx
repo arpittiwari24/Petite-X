@@ -5,6 +5,7 @@ import Pricing from "../pricing/Pricing"
 import Features from "./Features"
 import ContactUs from "./Contact"
 import Hero from "./Hero"
+import Sidebar from "./Sidebar"
 
 export default function HomePage() {
     const {data: session} = useSession()
@@ -12,7 +13,7 @@ export default function HomePage() {
     if(session && session.user) {
         return (
             <main>
-                <MainPage />
+                <Sidebar />
             </main>
         )
     }
