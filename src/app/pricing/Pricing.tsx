@@ -1,7 +1,15 @@
-
-import React from 'react'
+'use client'
+import { useSession } from "next-auth/react"
 
 const Pricing = () => {
+
+ const lifetime = "https://petite-x.lemonsqueezy.com/checkout/buy/66b236ca-a08b-4d9e-9af6-8b4abd13dac7"
+
+  const monthly = "https://petite-x.lemonsqueezy.com/checkout/buy/b5a275bd-5fae-4dad-b4ce-cf0478376e98"
+
+  const {data: session} = useSession()
+  const email = session?.user?.email
+
   return (
     <>
     <div className="max-w-[85rem] px-4 py-20 sm:px-6 lg:px-8 lg:py-20 mx-auto">
@@ -119,7 +127,9 @@ const Pricing = () => {
       </li>
     </ul>
 
-    <a className="mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-200 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600" href="#">
+    <a className="mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-200 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
+    href='https://petite-x.lemonsqueezy.com/checkout/buy/66b236ca-a08b-4d9e-9af6-8b4abd13dac7'
+    >
       Sign up
     </a>
   </div>
