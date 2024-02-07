@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Projects {
     _id: string,

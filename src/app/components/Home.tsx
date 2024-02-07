@@ -1,5 +1,5 @@
 "use client"
-import { signIn, useSession } from "next-auth/react"
+import {useSession } from "next-auth/react"
 import MainPage from "./MainPage"
 import Pricing from "../pricing/Pricing"
 import Features from "./Features"

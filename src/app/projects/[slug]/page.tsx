@@ -1,5 +1,5 @@
 'use client'
-import axios from "axios";
+
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -14,11 +14,11 @@ interface Urls {
 export default function Page({ params }: { params: { slug: string } }) {
 
   const [origUrl, setOrigUrl] = useState<string>('');
-  const [shortUrl, setShortUrl] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false)
   const [rateLimitExceeded, setRateLimitExceeded] = useState<boolean>(false);
   const [rateLimitMessage, setRateLimitMessage] = useState<string>('');
   const [urls, setUrls] = useState<Urls[]>([])
+  const [effectExecuted, setEffectExecuted] = useState<boolean>(false)
 
   const {data: session} = useSession()
   const email= session?.user?.email
@@ -26,18 +26,34 @@ export default function Page({ params }: { params: { slug: string } }) {
   const project = params.slug
 
   useEffect (() => {
-
     const getAllUrls = async () => {
-      const data = await axios.post("http://localhost:3333/allurl",{email, project})
-      setUrls(data.data)
+   if(!effectExecuted) {
+      try {
+      setLoading(true)
+      const data = await fetch("http://localhost:3333/allurl", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({email, project})
+      })
+      const response = await data.json()
+      setUrls(response)
+      setLoading(false)
+      setEffectExecuted(true)
+      } catch (error) {
+        console.log(error)
+        setLoading(false)
+      }
     }
+   }
 
     const myTimeout = setTimeout(() => {
       getAllUrls()
-    }, 1000)
+    }, 2000)
 
    return () => clearTimeout(myTimeout);
-  })
+  }, [effectExecuted, email, project])
 
   const isValidUrl = (url: string) => {
     const pattern = /^(http|https):\/\/[^ "]+$/;
@@ -72,12 +88,11 @@ export default function Page({ params }: { params: { slug: string } }) {
       const rateLimitMessage = await response.text();
       setRateLimitExceeded(true);
       setRateLimitMessage(rateLimitMessage);
-        setLoading(false)
+      setLoading(false)
       } else if (response.ok) {
         const data = await response.json();
         console.log(data);
-        
-        setShortUrl(data.shortUrl);
+        setEffectExecuted(false)
         setLoading(false);
       } else {
         console.error('Failed to shorten URL');
@@ -105,7 +120,7 @@ export default function Page({ params }: { params: { slug: string } }) {
          <button type="submit" className="btn btn-success  py-2 text-xl">+</button>
       </div>
     </form>
-    <div>
+    {/* <div>
     {shortUrl && (
      <div className="mt-4 flex flex-col md:flex-row md:items-center">
      <p className="text-lg font-medium text-gray-900">Shortened URL:</p>
@@ -120,7 +135,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     <div className='px-2'><button className='btn btn-info' onClick={() => window.location.reload()}>Reload</button></div>
    </div>   
     )}
-    </div>
+    </div> */}
     <div className="flex flex-col items-center justify-center gap-4 py-10 sm:w-full md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto">
       {urls.map((url) => (
           <div key={url._id} className="bg-gray-100 w-full p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
@@ -153,6 +168,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
       ))}
+      {loading && <span className="loading loading-spinner text-info"></span>}
     </div>
     </main>
     )
