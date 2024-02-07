@@ -3,9 +3,9 @@ import { useSession } from "next-auth/react"
 
 const Pricing = () => {
 
- const lifetime = "https://petite-x.lemonsqueezy.com/checkout/buy/66b236ca-a08b-4d9e-9af6-8b4abd13dac7"
+ const Lifetime = "https://petite-x.lemonsqueezy.com/checkout/buy/66b236ca-a08b-4d9e-9af6-8b4abd13dac7"
 
-  const monthly = "https://petite-x.lemonsqueezy.com/checkout/buy/b5a275bd-5fae-4dad-b4ce-cf0478376e98"
+  const Monthly = "https://petite-x.lemonsqueezy.com/checkout/buy/b5a275bd-5fae-4dad-b4ce-cf0478376e98"
 
   const {data: session} = useSession()
   const email = session?.user?.email
