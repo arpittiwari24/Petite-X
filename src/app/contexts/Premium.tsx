@@ -15,8 +15,7 @@ const IsPremiumContextProvider = (props: Props) => {
 
     const {data: session} = useSession()
     const email = session?.user?.email
-    const [premium, setPremium] = useState(false)
-    // const [plan,setPlan] = useState("")
+    const [premium, setPremium] = useState<boolean>(false)
     const api= process.env.NEXT_PUBLIC_API
 
         useEffect(() => {
@@ -34,12 +33,8 @@ const IsPremiumContextProvider = (props: Props) => {
                 {
                     withCredentials: false,
                   } )  
-                if(data.data.success === false) {
-                    // setPlan(data.data.planId)
-                    // console.log(plan)
-                    console.log(data);
-                    
-                    // setPremium(true)
+                if(data.data.body.status === "subscribed") {
+                    setPremium(true)
                 } else {
                     setPremium(false)
                 }             
@@ -48,7 +43,7 @@ const IsPremiumContextProvider = (props: Props) => {
                 }
             }
     
-            const delay = 800; //  in milliseconds
+            const delay = 1000; //  in milliseconds
             const timeoutId = setTimeout(() => {
               checkIsRegistered()
               fetchPremium();

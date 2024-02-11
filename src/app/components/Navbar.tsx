@@ -2,10 +2,14 @@
 import Link from "next/link";
 import SigninButton from "./SignInButton";
 import { signOut, useSession } from "next-auth/react";
+import { usePremiumContext } from "../contexts/Premium";
 
 
 export default function Navbar () {
     const {data: session} = useSession()
+    const premium = usePremiumContext()
+    console.log(premium);
+    
     return (
         <div className="navbar ">
         <div className="navbar-start">
