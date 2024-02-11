@@ -17,28 +17,27 @@ export default function Navbar () {
             <li><Link href="/pricing">Pricing</Link></li>
             <li><Link href="/features">Features</Link></li>
             <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/blogs">Blogs</Link></li>
+            {/* <li><Link href="/blogs">Blogs</Link></li> */}
             </ul>
           </div>
-          <Link href="/" className="btn btn-ghost max-sm:text-xl text-3xl">Petite-X</Link>
+          <Link href="/" className="btn btn-ghost max-sm:text-xl text-3xl">TidyL</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-lg">
             <li><Link href="/pricing">Pricing</Link></li>
             <li><Link href="/features">Features</Link></li>
             <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/blogs">Blogs</Link></li>
+            {/* <li><Link href="/blogs">Blogs</Link></li> */}
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end overflow-hidden">
           {session && session?.user ? (
-            <div className="w-14 rounded-lg">
+            <div className="w-10 rounded-lg">
               <div className="dropdown">
             <div tabIndex={0} role="button" className="">
              <img alt={session.user.name || ""} src={session.user.image || ""} className="rounded-full"/> 
             </div>
-            <ul tabIndex={0} className=" overflow-hidden menu menu-sm dropdown-content mt-3 z-[1]  shadow rounded-box w-96">
-            <li><Link href="/profile">Profile</Link></li>
+            <ul tabIndex={0} className="menu dropdown-content shadow rounded-box">
             <li><button onClick={() => signOut()} className="text-black">SignOut</button></li>
             </ul>
           </div>

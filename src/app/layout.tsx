@@ -9,7 +9,7 @@ import IsPremiumContextProvider from "./contexts/Premium";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Petite-X",
+  title: "TidyL",
   description: "Url Shortening service for your long urls",
   keywords: "Url, Url-Shortening, url shortener, link shortener, link , url"
 };
@@ -21,9 +21,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
-      </head>
       <body className={inter.className}>
         <Providers>
           <IsPremiumContextProvider>

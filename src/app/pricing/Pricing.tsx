@@ -10,6 +10,13 @@ const Pricing = () => {
   const {data: session} = useSession()
   const email = session?.user?.email
 
+  const handleClick = () => {
+    window.location.replace(Lifetime)
+  }
+
+  const handleClick2 = () => {
+    window.location.replace(Monthly)
+  }
   return (
     <>
     <div className="max-w-[85rem] px-4 py-20 sm:px-6 lg:px-8 lg:py-20 mx-auto">
@@ -91,16 +98,18 @@ const Pricing = () => {
       </li>
     </ul>
 
-    <a className="mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600" href="https://github.com/htmlstreamofficial/preline/tree/main/examples/html">
+    <button className="mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600" 
+    onClick={handleClick2}
+    >
       Sign up
-    </a>
+    </button>
   </div>
 
   <div className="flex flex-col border border-gray-700 text-center rounded-xl p-8 ">
-    <h4 className="font-medium text-lg text-gray-800 ">Lifetime</h4>
+    <h4 className="font-medium text-lg text-gray-800 ">Annual</h4>
     <span className="mt-5 font-bold text-5xl text-gray-800 ">
       <span className="font-bold text-2xl ">$</span>
-      50
+      30
     </span>
     <p className="mt-2 text-sm text-gray-500">Everything you need for a growing business</p>
 
@@ -127,11 +136,11 @@ const Pricing = () => {
       </li>
     </ul>
 
-    <a className="mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-200 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-    href='https://petite-x.lemonsqueezy.com/checkout/buy/66b236ca-a08b-4d9e-9af6-8b4abd13dac7'
+    <button className="mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-200 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
+    onClick={handleClick}
     >
       Sign up
-    </a>
+    </button>
   </div>
 
 </div>

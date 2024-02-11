@@ -17,20 +17,29 @@ const IsPremiumContextProvider = (props: Props) => {
     const email = session?.user?.email
     const [premium, setPremium] = useState(false)
     // const [plan,setPlan] = useState("")
+    const api= process.env.NEXT_PUBLIC_API
 
         useEffect(() => {
+
+            const checkIsRegistered = async () => {
+                const data = await axios.post("http://localhost:3333/users/register", {email})
+                console.log(data)
+              }
+
             const fetchPremium = async () => {
                 try {
-                const data = await axios.post("http://localhost:3333/payments/check-customer",{
+                const data = await axios.post(`http://localhost:3333/payments/check-customer`,{
                     email
                 },
                 {
                     withCredentials: false,
                   } )  
-                if(data.data.success === true) {
+                if(data.data.success === false) {
                     // setPlan(data.data.planId)
                     // console.log(plan)
-                    setPremium(true)
+                    console.log(data);
+                    
+                    // setPremium(true)
                 } else {
                     setPremium(false)
                 }             
@@ -41,6 +50,7 @@ const IsPremiumContextProvider = (props: Props) => {
     
             const delay = 800; //  in milliseconds
             const timeoutId = setTimeout(() => {
+              checkIsRegistered()
               fetchPremium();
             }, delay);
         
