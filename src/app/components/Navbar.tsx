@@ -8,7 +8,6 @@ import { usePremiumContext } from "../contexts/Premium";
 export default function Navbar () {
     const {data: session} = useSession()
     const premium = usePremiumContext()
-    console.log(premium);
     
     return (
         <div className="navbar ">
@@ -17,22 +16,35 @@ export default function Navbar () {
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li><Link href="/pricing">Pricing</Link></li>
+            {session && session?.user ? (
+              <></>
+            ): (
+              <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              <li><Link href="/pricing">Pricing</Link></li>
             <li><Link href="/features">Features</Link></li>
             <li><Link href="/contact">Contact</Link></li>
             {/* <li><Link href="/blogs">Blogs</Link></li> */}
             </ul>
+            )}
           </div>
           <Link href="/" className="btn btn-ghost max-sm:text-xl text-3xl">TidyL</Link>
+          {!premium === true? (
+            <span className="btn btn-ghost max-sm:text-0.5xl text-xl">Premium</span>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-lg">
+          {session && session?.user ? (
+            <></>
+          ) : (
+            <ul className="menu menu-horizontal px-1 text-lg">
             <li><Link href="/pricing">Pricing</Link></li>
             <li><Link href="/features">Features</Link></li>
             <li><Link href="/contact">Contact</Link></li>
             {/* <li><Link href="/blogs">Blogs</Link></li> */}
           </ul>
+          )}
         </div>
         <div className="navbar-end overflow-hidden">
           {session && session?.user ? (

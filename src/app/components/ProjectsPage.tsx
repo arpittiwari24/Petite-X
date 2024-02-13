@@ -32,14 +32,46 @@ const AllProjects = () => {
       e.preventDefault()
 
       const data = await axios.post("http://localhost:3333/projects/new",{email,name})
+      const button = document.getElementById("close") as HTMLFormElement | null;
+      if(button) {
+        button.click()
+      }
       setEffectExecuted(false)
     }
+
+    const openModal = () => {
+      const modal = document.getElementById('my_modal_3') as HTMLDialogElement | null;
+      if (modal) {
+        modal.showModal();
+      }
+    };
+    
   return (
     <>
-    <div className='flex items-center justify-center text-black py-6'>
-    <h1 className='text-4xl'>Your Projects</h1>
+    <div className='flex items-center justify-center text-black py-6 gap-10'>
+    <h1 className='text-4xl'>My Projects</h1>
+    {/* Create a new project */}
+    <button className="btn" onClick={openModal}>Create New</button>
+    <dialog id="my_modal_3" className="modal">
+    <div className="modal-box">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button id='close' className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <form onSubmit={handleSubmit} className="shadow-md rounded-lg p-8 bg-white w-full max-w-md">
+    <p className="text-2xl font-bold text-gray-700 mb-4">New project</p>
+    <input type="text" placeholder="Enter project name" 
+           value={name}
+           onChange={(e) => setName(e.target.value)}
+           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:ring-2" />
+    <button type="submit" className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out">
+      + Create
+    </button>
+  </form>
   </div>
-    <div className='flex flex-row-reverse items-center justify-center gap-4'>
+</dialog>
+  </div>
+    <div className='flex flex-row-reverse items-center justify-center gap-4 py-10'>
     <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-2 items-center gap-4 lg:gap-8">
 
     {projects.map((project) => (
@@ -54,18 +86,6 @@ const AllProjects = () => {
     </Link>
       ))}
   </div>
-  <div className="flex justify-center items-center pb-20 pt-4">
-  <form onSubmit={handleSubmit} className="shadow-md rounded-lg p-8 bg-white w-full max-w-md">
-    <p className="text-2xl font-bold text-gray-700 mb-4">Create new project</p>
-    <input type="text" placeholder="Enter project name" 
-           value={name}
-           onChange={(e) => setName(e.target.value)}
-           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:ring-2" />
-    <button type="submit" className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out">
-      + Create
-    </button>
-  </form>
-</div>
     </div>
     </>
   )
