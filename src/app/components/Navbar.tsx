@@ -28,8 +28,8 @@ export default function Navbar () {
             )}
           </div>
           <Link href="/" className="btn btn-ghost max-sm:text-xl text-3xl">TidyL</Link>
-          {!premium === true? (
-            <span className="btn btn-ghost max-sm:text-0.5xl text-xl">Premium</span>
+          {!premium === false ? (
+            <span className="btn btn-ghost btn-sm max-sm:text-0.5xl text-xl">Premium</span>
           ) : (
             <></>
           )}

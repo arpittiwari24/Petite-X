@@ -33,7 +33,7 @@ const IsPremiumContextProvider = (props: Props) => {
                 {
                     withCredentials: false,
                   } )  
-                if(data.data.body.status === "subscribed") {
+                if(data.data.status === "subscribed") {
                     setPremium(true)
                 } else {
                     setPremium(false)

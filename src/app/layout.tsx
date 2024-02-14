@@ -25,8 +25,7 @@ export default function RootLayout({
         <Providers>
           <IsPremiumContextProvider>
           <Navbar />
-            {children}
-          <Footer />
+            {children} 
           </IsPremiumContextProvider>
         </Providers>
       </body>

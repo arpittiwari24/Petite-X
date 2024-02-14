@@ -5,6 +5,7 @@ import Features from "./Features"
 import ContactUs from "./Contact"
 import Hero from "./Hero"
 import AllProjects from "./ProjectsPage"
+import Footer from "./Footer"
 
 export default function HomePage() {
     const {data: session} = useSession()
@@ -29,6 +30,9 @@ export default function HomePage() {
      </div>
      <div className="py-10">
      <ContactUs />
+     </div>
+     <div>
+        <Footer />
      </div>
   </div>
     )
