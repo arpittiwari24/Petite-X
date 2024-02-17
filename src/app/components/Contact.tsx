@@ -1,6 +1,41 @@
+import axios from 'axios';
 import Link from 'next/link';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const ContactUs = () => {
+
+  const [name, setName] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
+  const [phone, setPhone] = useState<string>("")
+  const [details, setDetails] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    const body = {
+      name,
+      email,
+      phone,
+      details
+    }
+
+    const data = await axios.post("http://localhost:3333/enquiry/new", body)
+
+    if(data.status === 200) {
+      setLoading(false)
+      setName("")
+      setEmail("")
+      setPhone("")
+      setDetails("")
+      toast.success("Your inquiry has been sent successfully")
+    } else {
+      setLoading(false)
+      toast.error("An error occurred, please try again")
+    }
+  }
+
   return (
     <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <div className="max-w-xl mx-auto">
@@ -21,45 +56,59 @@ const ContactUs = () => {
             Fill in the form
           </h2>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-4 lg:gap-6">
               {/* Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                 <div>
-                <label htmlFor="hs-firstname-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">First Name</label>
-                  <input type="text" name="hs-firstname-contacts-1" id="hs-firstname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " />
+                <label htmlFor="hs-firstname-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">Name</label>
+                  <input type="text" name="hs-firstname-contacts-1" id="hs-firstname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 "
+                  value={name}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                  required
+                  />
                 </div>
 
-                <div>
-                  <label htmlFor="hs-lastname-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">Last Name</label>
-                  <input type="text" name="hs-lastname-contacts-1" id="hs-lastname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " />
-                </div>
-              </div>
               {/* End Grid */}
 
               {/* Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                 <div>
                   <label htmlFor="hs-email-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">Email</label>
-                  <input type="email" name="hs-email-contacts-1" id="hs-email-contacts-1" autoComplete="email" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " />
+                  <input type="email" name="hs-email-contacts-1" id="hs-email-contacts-1" autoComplete="email" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " 
+                  value={email}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                  required
+                  />
                 </div>
 
                 <div>
                   <label htmlFor="hs-phone-number-1" className="block mb-2 text-sm text-gray-700 font-medium ">Phone Number</label>
-                  <input type="text" name="hs-phone-number-1" id="hs-phone-number-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " />
+                  <input type="text" name="hs-phone-number-1" id="hs-phone-number-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " 
+                  value={phone}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+                  />
                 </div>
               </div>
               {/* End Grid */}
 
               <div>
                 <label htmlFor="hs-about-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">Details</label>
-                <textarea id="hs-about-contacts-1" name="hs-about-contacts-1" rows={4} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 "></textarea>
+                <textarea id="hs-about-contacts-1" name="hs-about-contacts-1" rows={4} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 "
+                value={details}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDetails(e.target.value)}
+                ></textarea>
               </div>
             </div>
             {/* End Grid */}
 
             <div className="mt-6 grid">
-              <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 ">Send inquiry</button>
+              <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 ">   
+                {loading ? (
+                  <span className="loading loading-spinner text-info"></span>
+                ): (
+                  <>Send inquiry</>
+                )}
+                </button>
             </div>
 
             <div className="mt-3 text-center">

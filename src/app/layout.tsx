@@ -5,6 +5,7 @@ import Providers from "./contexts/Providers";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import IsPremiumContextProvider from "./contexts/Premium";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+         <Toaster position="top-center" />
         <Providers>
           <IsPremiumContextProvider>
           <Navbar />
