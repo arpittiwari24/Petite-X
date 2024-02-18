@@ -21,7 +21,7 @@ const AllProjects = () => {
     useEffect(() => {
         const getAllProjects = async () => {
             if(!effectExecuted) {
-              const data = await axios.post("http://localhost:3333/projects/all",{email})
+              const data = await axios.post("https://petite.onrender.com/projects/all",{email})
             
             setProjects(data.data)
             console.log(projects.length)
@@ -34,7 +34,7 @@ const AllProjects = () => {
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault()
 
-      const data = await axios.post("http://localhost:3333/projects/new",{email,name})
+      const data = await axios.post("https://petite.onrender.com/projects/new",{email,name})
       const button = document.getElementById("close") as HTMLFormElement | null;
       if(button) {
         button.click()

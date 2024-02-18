@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
    if(!effectExecuted) {
       try {
       setLoading(true)
-      const data = await fetch("http://localhost:3333/allurl", {
+      const data = await fetch("https://petite.onrender.com/allurl", {
         method: "POST",
         headers: {
           "Content-Type" : "application/json"
@@ -75,7 +75,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   
     try {
-      const response = await fetch('http://localhost:3333/api/short', {
+      const response = await fetch('https://petite.onrender.com/api/short', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -21,13 +21,13 @@ const IsPremiumContextProvider = (props: Props) => {
         useEffect(() => {
 
             const checkIsRegistered = async () => {
-                const data = await axios.post("http://localhost:3333/users/register", {email})
+                const data = await axios.post("https://petite.onrender.com/users/register", {email})
                 console.log(data)
               }
 
             const fetchPremium = async () => {
                 try {
-                const data = await axios.post(`http://localhost:3333/payments/check-customer`,{
+                const data = await axios.post(`https://petite.onrender.com/payments/check-customer`,{
                     email
                 },
                 {

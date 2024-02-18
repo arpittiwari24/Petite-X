@@ -21,7 +21,7 @@ const ContactUs = () => {
       details
     }
 
-    const data = await axios.post("http://localhost:3333/enquiry/new", body)
+    const data = await axios.post("https://petite.onrender.com/enquiry/new", body)
 
     if(data.status === 200) {
       setLoading(false)
