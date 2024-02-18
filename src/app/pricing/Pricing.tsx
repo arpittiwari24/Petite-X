@@ -34,27 +34,26 @@ const Pricing = () => {
   <div className="flex flex-col border border-gray-700 text-center rounded-xl p-8 ">
     <h4 className="font-medium text-lg text-gray-800 ">Free</h4>
     <span className="mt-7 font-bold text-5xl text-gray-800 ">Free</span>
-    <p className="mt-2 text-sm text-gray-500">Forever free</p>
 
     <ul className="mt-7 space-y-2.5 text-sm">
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          1 user
+          2 Projects
         </span>
       </li>
 
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          Plan features
+          10 urls inside projects
         </span>
       </li>
 
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          Product support
+          Analytics (only clicks)
         </span>
       </li>
     </ul>
@@ -73,27 +72,27 @@ const Pricing = () => {
       <span className="font-bold text-2xl ">$</span>
       5
     </span>
-    <p className="mt-2 text-sm text-gray-500">All the basics for starting a new business</p>
+    
 
     <ul className="mt-7 space-y-2.5 text-sm">
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          2 users
+          Unlimited Projects
         </span>
       </li>
 
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          Plan features
+         Unlimited Urls
         </span>
       </li>
 
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          Product support
+          Complete Analytics
         </span>
       </li>
     </ul>
@@ -111,27 +110,26 @@ const Pricing = () => {
       <span className="font-bold text-2xl ">$</span>
       30
     </span>
-    <p className="mt-2 text-sm text-gray-500">Everything you need for a growing business</p>
 
     <ul className="mt-7 space-y-2.5 text-sm">
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          5 users
+          Same as monthly plan
         </span>
       </li>
 
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          Plan features
+          Cost Saving <span className=" line-through">$60  </span> $30
         </span>
       </li>
 
       <li className="flex space-x-2">
         <svg className="flex-shrink-0 mt-0.5 h-4 w-4 text-blue-600 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span className="text-gray-800 ">
-          Product support
+          No monthly payment hassle 
         </span>
       </li>
     </ul>
