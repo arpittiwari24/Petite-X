@@ -62,7 +62,7 @@ const ContactUs = () => {
               {/* Grid */}
                 <div>
                 <label htmlFor="hs-firstname-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">Name</label>
-                  <input type="text" name="hs-firstname-contacts-1" id="hs-firstname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 "
+                  <input type="text" name="hs-firstname-contacts-1" id="hs-firstname-contacts-1" className="py-3 px-4 block w-full border-gray-900 rounded-lg text-sm border disabled:opacity-50 disabled:pointer-events-none bg-transparent text-black "
                   value={name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                   required
@@ -75,7 +75,7 @@ const ContactUs = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                 <div>
                   <label htmlFor="hs-email-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">Email</label>
-                  <input type="email" name="hs-email-contacts-1" id="hs-email-contacts-1" autoComplete="email" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " 
+                  <input type="email" name="hs-email-contacts-1" id="hs-email-contacts-1" autoComplete="email" className="py-3 px-4 block w-full border-gray-900 rounded-lg text-sm border disabled:opacity-50 disabled:pointer-events-none bg-transparent text-black " 
                   value={email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                   required
@@ -84,7 +84,7 @@ const ContactUs = () => {
 
                 <div>
                   <label htmlFor="hs-phone-number-1" className="block mb-2 text-sm text-gray-700 font-medium ">Phone Number</label>
-                  <input type="text" name="hs-phone-number-1" id="hs-phone-number-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 " 
+                  <input type="text" name="hs-phone-number-1" id="hs-phone-number-1" className="py-3 px-4 block w-full border border-gray-900 rounded-lg text-sm f disabled:opacity-50 disabled:pointer-events-none bg-transparent text-black " 
                   value={phone}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
                   />
@@ -94,7 +94,7 @@ const ContactUs = () => {
 
               <div>
                 <label htmlFor="hs-about-contacts-1" className="block mb-2 text-sm text-gray-700 font-medium ">Details</label>
-                <textarea id="hs-about-contacts-1" name="hs-about-contacts-1" rows={4} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900  text-gray-400 "
+                <textarea id="hs-about-contacts-1" name="hs-about-contacts-1" rows={4} className="py-3 px-4 block w-full border-gray-900 border rounded-lg text-sm  disabled:opacity-50 disabled:pointer-events-none bg-transparent text-black "
                 value={details}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDetails(e.target.value)}
                 ></textarea>
@@ -103,7 +103,7 @@ const ContactUs = () => {
             {/* End Grid */}
 
             <div className="mt-6 grid">
-              <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 ">   
+              <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border text-white border-transparent bg-blue-600  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 ">   
                 {loading ? (
                   <span className="loading loading-spinner text-info"></span>
                 ): (
