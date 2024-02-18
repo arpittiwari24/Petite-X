@@ -28,11 +28,11 @@ export default function Navbar () {
             )}
           </div>
           <Link href="/" className="btn btn-ghost max-sm:text-xl text-3xl">TidyL</Link>
-          {!premium === false ? (
+          {/* {!premium === false ? (
             <span className="btn btn-ghost btn-sm max-sm:text-0.5xl text-xl px-2">Premium</span>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
         <div className="navbar-center hidden lg:flex">
           {session && session?.user ? (
